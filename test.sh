@@ -14,6 +14,8 @@
     echo "Cleaning up download directory:" $1
     echo ""
     echo "Deleting .nzb-files"
+	
+	# remove the following file extensions (nzb,sfv,nfo,sub,srt,idx,srr,jpg,par2)
     nzbcount=`/opt/bin/find "$1" -name "*.nzb" -type f -print -exec rm {} \; | wc -l`
     echo "Deleting .sfv-files"
     sfvcount=`/opt/bin/find "$1" -name "*.sfv" -type f -print -exec rm {} \; | wc -l`
@@ -30,7 +32,9 @@
     jpgcount=`/opt/bin/find "$1" -name "*.jpg" -type f -print -exec rm {} \; | wc -l`
     echo "Deleting .par2-files"
     par2count=`/opt/bin/find "$1" -name "*.par2" -type f -print -exec rm {} \; | wc -l`
-    echo "Deleting .mkv-files"
+    
+	# remove the smallest mkv files 
+	echo "Deleting .mkv-files"
     mkvcount=`/opt/bin/find "$1" -name "*.mkv" -type f -print | wc -l`
 
     if [ "$mkvcount" -ge "2" ]; then
